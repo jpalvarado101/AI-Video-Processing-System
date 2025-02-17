@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+torch
+whisper
+opencv-python
+numpy
+ffmpeg-python
+clip-by-openai
+Pillow
+transformers
+redis
+psycopg2-binary
+kafka-python
+streamlit
+requests

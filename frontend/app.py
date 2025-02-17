@@ -1,18 +1,22 @@
 import streamlit as st
 import requests
+import json
 
-st.title("🎬 AI Video Processing with CLIP & CUDA")
+st.title("AI-Powered Video Processing")
 
 uploaded_file = st.file_uploader("Upload a video", type=["mp4"])
 
-if uploaded_file:
-    st.video(uploaded_file)
-    if st.button("Process Video"):
-        files = {"file": uploaded_file.getvalue()}
-        response = requests.post("http://localhost:8000/process_video/", files=files)
-
-        if response.status_code == 200:
-            result = response.json()
-            st.write("🎯 Key Moments:", result["key_moments"])
-            st.write("📝 Transcript:", result["transcript"])
-            st.image(result["thumbnail_path"], caption="Best Thumbnail")
+if uploaded_file is not None:
+    files = {"file": uploaded_file.getvalue()}
+    response = requests.post("http://localhost:8000/process_video/", files=files)
+    
+    if response.status_code == 200:
+        data = response.json()
+        st.subheader("Key Moments")
+        st.write(data["key_moments"])
+        
+        st.subheader("Transcript")
+        st.write(data["transcript"])
+        
+        st.subheader("Generated Thumbnail")
+        st.image(data["thumbnail"])
