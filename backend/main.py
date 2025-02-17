@@ -4,8 +4,6 @@ import whisper
 import cv2
 import numpy as np
 import ffmpeg
-import numpy as np
-import ffmpeg
 import clip
 from PIL import Image
 import torch
