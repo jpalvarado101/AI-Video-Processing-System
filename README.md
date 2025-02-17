@@ -1,11 +1,8 @@
 # **AI-Powered Video Clipping & Summarization Tool 🎥🚀**
 
-🚨 **License Notice:**  
-This project is under a **strict Read-Only License**.  
-✔️ You may **view** the code, but  
-❌ You **cannot copy, modify, use, or distribute** any part of it.  
-Violations may result in legal action. See the [LICENSE](LICENSE) file for details.
+🚨 **Read License Notice** 🚨 
 
+## **📌 Summary**
 An **AI-driven video processing** tool that extracts the **most engaging moments** from long-form videos **locally** using **Whisper, CLIP, OpenCV, Kafka, Redis, and Kubernetes**.  
 
 🔹 **No OpenAI API required!** Uses **free open-source models** instead.  
@@ -203,7 +200,12 @@ Redis caches the **best scenes and captions**, so users don’t need to reproces
 ---
 
 ## **📜 License**
-This project is licensed under my **Custom Read-Only License**.
+
+🚨 **License Notice:**  
+This project is under a **strict Read-Only License**.  
+✔️ You may **view** the code, but  
+❌ You **cannot copy, modify, use, or distribute** any part of it.  
+Violations may result in legal action. See the [LICENSE](LICENSE) file for details.
 
 ---
 
