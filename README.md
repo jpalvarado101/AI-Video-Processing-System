@@ -1,108 +1,217 @@
-# AI Video Processing System
+# **AI-Powered Video Clipping & Summarization Tool 🎥🚀**
 
-## 🚀 Overview
-This project is an **AI-powered video processing system** that runs entirely **locally** on your machine. It includes:
-- ✅ **CUDA-optimized video processing** for **scene detection**.
-- ✅ **Speech transcription** with Whisper AI.
-- ✅ **AI-based summarization** using an open-source LLM.
-- ✅ **AI-generated thumbnails** using **CLIP**.
-- ✅ **Local storage and caching** with Redis and PostgreSQL.
-- ✅ **Streamlit-based UI** for video upload & analysis.
-- ✅ **Docker for containerized local deployment.**
+![License](https://img.shields.io/badge/License-MIT-blue.svg)  
+A **fully open-source**, **AI-driven video processing** tool that extracts the **most engaging moments** from long-form videos **locally** using **Whisper, CLIP, OpenCV, Kafka, Redis, and Kubernetes**.  
+
+🔹 **No OpenAI API required!** Uses **free open-source models** instead.  
+🔹 **Deployable on Minikube/K3s** (Kubernetes-ready)  
+🔹 **Real-time Kafka & Redis Processing**  
+🔹 **GPU-Optimized (GTX 1080 Recommended, but CPU works too)**  
 
 ---
-## 🛠️ Tech Stack
-### **Core Technologies**
-- **Python** (FastAPI, Streamlit)
-- **CUDA (GTX 1080 Support, Local Processing)**
-- **OpenAI Whisper** (Speech-to-Text)
-- **CLIP** (AI-based Thumbnail Generation)
-- **Transformers** (LLM Summarization)
-- **OpenCV & FFmpeg** (Video Processing)
-- **Redis, PostgreSQL** (Local Storage & Caching)
-- **Docker** (Local Deployment)
+
+## **📌 Features**
+✅ **AI-Powered Video Highlight Detection** (CLIP Model)  
+✅ **Scene Segmentation** (SceneDetect + OpenCV)  
+✅ **Speech & Emotion Analysis** (Whisper ASR + Sentiment Analysis)  
+✅ **LLM-Based Auto Captioning** (Llama 3 / Falcon)  
+✅ **FFmpeg for Video Processing**  
+✅ **Kafka + Redis for Real-Time Processing**  
+✅ **Kubernetes (Minikube/K3s) for Scalability**  
+✅ **Streamlit UI for User Interaction**  
 
 ---
-## 🔥 Features
-### ✅ AI-Powered Video Processing
-- **Scene Detection**: Uses **CUDA-optimized OpenCV** to find scene transitions.
-- **Speech Transcription**: Converts **audio to text** with **Whisper AI**.
-- **AI-Based Summarization**: Uses **LLM (Facebook BART-Large-CNN)** for summarization.
-- **AI-Based Thumbnail Generation**: Uses **CLIP** to find the best frame for thumbnails.
 
-### ✅ Local-First Infrastructure
-- **FastAPI Backend** for real-time AI processing.
-- **Streamlit UI** for easy video upload & results visualization.
-- **PostgreSQL** for storing processed video metadata locally.
-- **Redis** for fast caching of video analysis results.
-
-### ✅ Local Deployment & Optimization
-- **Runs completely offline (No cloud dependencies).**
-- **Optimized for GTX 1080 / CUDA-based processing**
-- **Docker for easy setup & isolation.**
-
----
-## 📦 Installation
-### 1️⃣ **Clone the Repository**
-```bash
-git clone https://github.com/yourusername/ai-video-processing.git
-cd ai-video-processing
+## **📂 Project Structure**
+```
+AI-Video-Clipping/
+├── backend/
+│   ├── app.py                 # FastAPI Backend
+│   ├── requirements.txt        # Python Dependencies
+│   ├── Dockerfile              # Dockerized Backend
+│   ├── k8s/                    # Kubernetes Configurations
+│   │   ├── deployment.yaml      # K8s Deployment
+│   │   ├── service.yaml         # K8s Service
+│   ├── models/                  # AI Models
+│   │   ├── clip_model.py         # CLIP-based scene selection
+│   │   ├── speech_analysis.py    # Whisper ASR + Sentiment Analysis
+│   │   ├── summarization.py      # Llama 3 / Falcon AI Summarization
+│   ├── utils/                    # Utility Functions
+│   │   ├── video_processing.py   # Scene detection (SceneDetect + OpenCV)
+│   │   ├── kafka_producer.py     # Kafka Producer
+│   │   ├── redis_cache.py        # Redis Caching
+├── frontend/
+│   ├── app.py                 # Streamlit Frontend
+│   ├── requirements.txt        # Streamlit Dependencies
+├── kafka_setup/
+│   ├── docker-compose.yml      # Kafka + Zookeeper Setup
+└── README.md                   # Documentation
 ```
 
-### 2️⃣ **Install Dependencies**
-```bash
+---
+
+## **⚡ Installation & Setup**
+### **🔹 1. Start Kafka & Redis**
+Ensure **Kafka and Redis** are running before executing the backend:
+
+```sh
+cd kafka_setup
+docker-compose up -d
+```
+
+Start Redis:
+
+```sh
+docker run -d -p 6379:6379 redis
+```
+
+### **🔹 2. Install Dependencies**
+#### **Backend Setup**
+```sh
+cd backend
 pip install -r requirements.txt
+uvicorn app:app --reload
 ```
 
-### 3️⃣ **Run FastAPI Backend Locally**
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-### 4️⃣ **Run Streamlit UI Locally**
-```bash
-streamlit run main.py
+#### **Frontend Setup (Streamlit)**
+```sh
+cd frontend
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
 ---
-## 🐳 Local Docker Deployment
-### **Build & Run Docker Container**
-```bash
-docker build -t ai-video-processing .
-docker run -p 8000:8000 ai-video-processing
-```
+
+## **🎯 How It Works**
+1. **Upload a video via the Streamlit UI.**  
+2. The **backend processes the video**:  
+   - Detects **scene changes** using **OpenCV & SceneDetect**.  
+   - Extracts **audio & transcribes** it via **Whisper ASR**.  
+   - Runs **sentiment analysis** to detect **high-emotion moments**.  
+   - Uses **CLIP to score each scene** and selects the most engaging one.  
+   - Generates **automatic captions & summaries** via **Llama 3 / Falcon**.  
+3. **Kafka sends events** to simulate **A/B testing**.  
+4. **Redis caches results** for faster retrieval.  
+5. **The best-scoring clip is displayed** with a generated caption.  
 
 ---
-## 📌 API Endpoints
-### 🎬 **Process Video**
-**POST** `/process_video/`
-#### **Request**
-```bash
-curl -X 'POST' \
-  'http://localhost:8000/process_video/' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'file=@your_video.mp4'
+
+## **🖥️ Backend API (FastAPI)**
+### **🔹 Endpoint: Process Video**
+```http
+POST /process_video
 ```
-#### **Response**
+#### **Request:**
+Upload a video file (`.mp4`, `.mov`, `.avi`).
+```sh
+curl -X POST "http://localhost:8000/process_video" -F "file=@your_video.mp4"
+```
+#### **Response:**
 ```json
 {
-  "key_moments": [10.2, 34.8, 120.5],
-  "transcript": "This is a sample transcript...",
-  "summary": "Key highlights of the video...",
-  "thumbnail": "thumbnail.jpg"
+  "caption": "The speaker passionately discusses the importance of AI...",
+  "best_scene": [10.5, 15.2],  # Start & End time of the best scene
+  "sentiments": "Positive"
 }
 ```
 
 ---
-## 📜 License
-This project is licensed under the **Apache 2.0 License**.
+
+## **🖥️ Streamlit UI (Frontend)**
+1. **Upload a video**  
+2. Click **Process Video**  
+3. The AI will **find the best scene, transcribe speech, and generate a caption.**  
+4. The **output video and text** are displayed.
 
 ---
-## 👥 Contributors
-- **[John Alvarado](https://github.com/jpalvarado101)** - Creator & Maintainer
+
+## **☸️ Deployment (Kubernetes - Minikube/K3s)**
+### **🔹 Deploy the Backend**
+```sh
+kubectl apply -f backend/k8s/deployment.yaml
+kubectl apply -f backend/k8s/service.yaml
+```
+### **🔹 Expose the Service**
+```sh
+minikube service ai-video-backend-service --url
+```
+### **🔹 Run Kubernetes Dashboard**
+```sh
+minikube dashboard
+```
 
 ---
-## ⭐ Support
-If you like this project, **please ⭐ star the repository** and contribute! 🚀
+
+## **🛠️ Key Technologies Used**
+### **🔹 AI Models**
+- **Whisper ASR** → **Transcribes video speech** into text.  
+- **CLIP** → **Finds the most visually engaging scene**.  
+- **Hugging Face Sentiment Analysis** → Detects emotional moments.  
+- **Llama 3 / Falcon** → Generates **video captions & summaries**.  
+
+### **🔹 Backend (FastAPI)**
+- Handles **AI processing requests**.  
+- Communicates with **Kafka & Redis**.  
+- Serves **AI-generated captions and summaries**.  
+
+### **🔹 Frontend (Streamlit)**
+- **User uploads video** and receives the **best-scoring clip**.  
+
+### **🔹 Infrastructure**
+- **Kafka** → Simulates **real-time A/B testing**.  
+- **Redis** → Caches results for **faster video retrieval**.  
+- **Kubernetes** → Deploys backend with **auto-scaling & load balancing**.  
+
+---
+
+## **📌 Sample Output**
+**Uploaded Video:** `"example_video.mp4"`  
+**Best Scene:** `Start: 10.5s → End: 15.2s`  
+**Generated Caption:** `"The speaker passionately discusses the importance of AI..."`  
+**Sentiment Analysis:** `"Positive"`  
+
+🎥 **The best scene is clipped and ready for sharing!**  
+
+---
+
+## **🚀 Future Improvements**
+✅ **AI-Powered Auto-Cropping** (Adjust framing dynamically)  
+✅ **Multi-Modal Learning** (Combine **video, speech, and facial expressions**)  
+✅ **GPU-Optimized Pipelines** (TensorRT for faster inference)  
+✅ **Realtime Engagement Prediction** (Train models to **predict virality**)  
+
+---
+
+## **💡 FAQ**
+### **❓ Can I run this without a GPU?**
+Yes! All models run **on CPU**, but for **faster processing**, a **GPU (GTX 1080 or better) is recommended**.
+
+### **❓ Do I need OpenAI’s API?**
+No! This project **only uses free, open-source models** (Whisper, CLIP, Llama 3, etc.).
+
+### **❓ How does Kafka improve this system?**
+Kafka simulates **real-time event processing**, allowing **A/B testing of different AI-generated video clips**.
+
+### **❓ Why use Redis?**
+Redis caches the **best scenes and captions**, so users don’t need to reprocess the same video.
+
+---
+
+## **📜 License**
+This project is licensed under my **Custom Read-Only License**.
+
+---
+
+## **🌟 Contributing**
+Got ideas? Want to improve the AI models? Open a **pull request** or create an **issue**!
+
+---
+
+## **🔥 Conclusion**
+This **AI Video Clipping System** makes you **the perfect candidate for OpusClip** by showcasing:
+✅ **AI-Driven Video Processing**  
+✅ **Backend Engineering & API Development**  
+✅ **Data Pipelines (Kafka & Redis)**  
+✅ **Cloud Deployment (Kubernetes / Minikube)**  
+✅ **Real-World Scalability**  
 
