@@ -202,11 +202,6 @@ This project is licensed under my **Custom Read-Only License**.
 
 ---
 
-## **🌟 Contributing**
-Got ideas? Want to improve the AI models? Open a **pull request** or create an **issue**!
-
----
-
 ## **🔥 Conclusion**
 This **AI Video Clipping System** makes you **the perfect candidate for OpusClip** by showcasing:
 ✅ **AI-Driven Video Processing**  
