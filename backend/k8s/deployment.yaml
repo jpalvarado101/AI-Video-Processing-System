@@ -1,0 +1,20 @@
+# backend/k8s/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-video-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-video-backend
+  template:
+    metadata:
+      labels:
+        app: ai-video-backend
+    spec:
+      containers:
+      - name: ai-video-backend
+        image: your-docker-image:latest  # Build and tag your image accordingly
+        ports:
+        - containerPort: 8000

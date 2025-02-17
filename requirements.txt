@@ -1,15 +1,14 @@
 fastapi
 uvicorn
-torch
-whisper
+python-multipart
 opencv-python
-numpy
-ffmpeg-python
-clip-by-openai
+torch
+clip  # or use: git+https://github.com/openai/CLIP.git
 Pillow
+whisper
 transformers
-redis
-psycopg2-binary
 kafka-python
+redis
+ffmpeg-python
 streamlit
 requests

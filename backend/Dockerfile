@@ -1,8 +1,18 @@
-FROM python:3.9
+# backend/Dockerfile
+FROM python:3.9-slim
 
+# Set the working directory
 WORKDIR /app
-COPY backend /app
 
-RUN pip install -r requirements.txt
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Copy all backend source code
+COPY . .
+
+# Expose the FastAPI port
+EXPOSE 8000
+
+# Run the FastAPI application with uvicorn
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

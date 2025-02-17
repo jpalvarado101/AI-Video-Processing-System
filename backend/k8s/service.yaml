@@ -1,0 +1,13 @@
+# backend/k8s/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-video-backend-service
+spec:
+  type: NodePort
+  selector:
+    app: ai-video-backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30001
