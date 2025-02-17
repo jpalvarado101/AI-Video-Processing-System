@@ -1,7 +1,12 @@
 # **AI-Powered Video Clipping & Summarization Tool 🎥🚀**
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)  
-A **fully open-source**, **AI-driven video processing** tool that extracts the **most engaging moments** from long-form videos **locally** using **Whisper, CLIP, OpenCV, Kafka, Redis, and Kubernetes**.  
+🚨 **License Notice:**  
+This project is under a **strict Read-Only License**.  
+✔️ You may **view** the code, but  
+❌ You **cannot copy, modify, use, or distribute** any part of it.  
+Violations may result in legal action. See the [LICENSE](LICENSE) file for details.
+
+An **AI-driven video processing** tool that extracts the **most engaging moments** from long-form videos **locally** using **Whisper, CLIP, OpenCV, Kafka, Redis, and Kubernetes**.  
 
 🔹 **No OpenAI API required!** Uses **free open-source models** instead.  
 🔹 **Deployable on Minikube/K3s** (Kubernetes-ready)  
