@@ -2,6 +2,8 @@
 
 🚨 **Read License Notice** 🚨 
 
+[![IMAGE ALT TEXT](https://img.youtube.com/vi/fCaHg2MSohk/0.jpg)](https://youtu.be/fCaHg2MSohk)
+
 ## **📌 Summary**
 An **AI-driven video processing** tool that extracts the **most engaging moments** from long-form videos **locally** using **Whisper, CLIP, OpenCV, Kafka, Redis, and Kubernetes**.  
 
